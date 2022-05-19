@@ -1,20 +1,23 @@
 <template>
-  <nav class="bg-white w-full">
+  <nav class="sticky top-0 bg-white w-full border-b border-gray-200 mb-4">
     <div
       class="flex flex-row flex-wrap justify-between items-center max-w-6xl w-full mx-auto p-6"
     >
       <nuxt-link to="/" class="flex items-center">
         <img class="h-8 mr-4" src="/logo/1x/JotLogo.png" alt="Jot">
-        <span class="self-center text-xl font-semibold text-black">My blog</span>
+        <span
+          class="hidden md:inline-block self-center text-xl font-semibold text-black"
+        >My blog</span>
       </nuxt-link>
       <div>
-        <button
-          v-if="isLoggedIn && !isDashboard"
-          type="button"
-          class="text-white bg-teal-600 hover:bg-teal-800 border-2 border-teal-600 hover:border-teal-800 focus:ring-4 focus:ring-teal-300 font-bold rounded-lg text-sm px-5 py-2.5 mr-3"
-        >
-          Dashboard
-        </button>
+        <nuxt-link v-if="isLoggedIn && !isDashboard" to="/dashboard">
+          <button
+            type="button"
+            class="text-white bg-teal-600 hover:bg-teal-800 border-2 border-teal-600 hover:border-teal-800 focus:ring-4 focus:ring-teal-300 font-bold rounded-lg text-sm px-5 py-2.5 mr-3"
+          >
+            Dashboard
+          </button>
+        </nuxt-link>
         <nuxt-link v-if="isLoggedIn" to="/logout">
           <button
             type="button"
