@@ -6,10 +6,14 @@
     <!-- Main content -->
     <div class="md:max-w-2xl max-w-xl w-full mx-auto py-3 px-6">
       <!-- Post title -->
-      <h1 class="md:text-6xl text-4xl font-bold font-slight-italic mb-4">My blog</h1>
+      <h1 class="md:text-6xl text-4xl font-bold font-slight-italic mb-4">
+        My blog
+      </h1>
 
       <!-- Post author and date -->
-      <h2 class="text-xl text-teal-500">by Author<br>May 21, 2022</h2>
+      <h2 class="text-xl text-teal-500">
+        by Author<br>May 21, 2022
+      </h2>
 
       <!-- Post content -->
       <article class="prose mt-8 mx-auto max-w-full w-full">
@@ -26,12 +30,6 @@
   </div>
 </template>
 
-<style lang="postcss" scoped>
-.font-slight-italic {
-  font-variation-settings: "slnt" -5;
-}
-</style>
-
 <script>
 import NavigationBar from '~/components/NavigationBar.vue'
 export default {
@@ -39,3 +37,9 @@ export default {
   components: { NavigationBar }
 }
 </script>
+
+<style lang="postcss" scoped>
+.font-slight-italic {
+  font-variation-settings: "slnt" -5;
+}
+</style>

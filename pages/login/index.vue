@@ -14,31 +14,37 @@
         </p>
 
         <!-- Email login (passwordless) -->
-        <form class="w-full"
-              @submit.prevent="onSubmit()">
-          <input type="email"
-                 class="bg-gray-100 rounded-md p-3 w-full mb-4"
-                 v-model="email"
-                 placeholder="E-mail address"
-                 >
-          <input type="submit"
-                 class="bg-teal-500 rounded-md p-3 w-full text-white font-bold hover:bg-teal-700 cursor-pointer"
-                 value="Send magic login link"
-                 >
+        <form
+          class="w-full"
+          @submit.prevent="onSubmit()"
+        >
+          <input
+            v-model="email"
+            type="email"
+            class="bg-gray-100 rounded-md p-3 w-full mb-4"
+            placeholder="E-mail address"
+          >
+          <input
+            type="submit"
+            class="bg-teal-500 rounded-md p-3 w-full text-white font-bold hover:bg-teal-700 cursor-pointer"
+            value="Send magic login link"
+          >
         </form>
 
         <!-- Divider -->
         <div class="flex flex-row justify-between items-center w-full my-6">
-          <div class="grow bg-gray-300 h-px w-full"></div>
+          <div class="grow bg-gray-300 h-px w-full" />
           <span class="flex-none grow-none text-gray-300 px-3 font-bold">
             or
           </span>
-          <div class="grow bg-gray-300 h-px w-full"></div>
+          <div class="grow bg-gray-300 h-px w-full" />
         </div>
 
         <!-- Sign in with Google -->
-        <button @click="signInWithGoogle()"
-          class="bg-gray-500 rounded-md p-3 w-full text-white font-bold hover:bg-gray-700">
+        <button
+          class="bg-gray-500 rounded-md p-3 w-full text-white font-bold hover:bg-gray-700"
+          @click="signInWithGoogle()"
+        >
           Sign in with Google
         </button>
       </div>
