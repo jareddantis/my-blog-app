@@ -31,7 +31,9 @@ export default {
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
     // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    // https://google-fonts.nuxtjs.org
+    '@nuxtjs/google-fonts'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -57,6 +59,21 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  // Google Fonts
+  googleFonts: {
+    display: 'swap',
+    families: {
+      'Roboto+Flex': {
+        wght: [400, 700],
+        ital: [400, 700]
+      },
+      Lora: {
+        wght: [400, 700],
+        ital: [400, 700]
+      }
+    }
   },
 
   target: 'static'
