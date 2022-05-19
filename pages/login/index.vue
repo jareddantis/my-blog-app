@@ -1,5 +1,7 @@
 <template>
-  <div class="md:bg-teal-100 w-screen h-screen flex justify-center items-center">
+  <div
+    class="md:bg-teal-100 w-screen h-screen flex justify-center items-center"
+  >
     <!-- Login form container card -->
     <div class="bg-white w-full md:max-w-sm md:rounded-lg md:shadow-xl">
       <!-- Card contents -->
@@ -10,14 +12,12 @@
           Log in or register
         </h1>
         <p class="text-center mt-2 mb-8">
-          Whether you're new or returning,<br>just enter your e-mail address below.
+          Whether you're new or returning,<br>just enter your e-mail address
+          below.
         </p>
 
         <!-- Email login (passwordless) -->
-        <form
-          class="w-full"
-          @submit.prevent="onSubmit()"
-        >
+        <form class="w-full" @submit.prevent="onSubmit()">
           <input
             v-model="email"
             type="email"
@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'LoginPage',
   data () {
@@ -61,12 +63,17 @@ export default {
       isClient: false
     }
   },
+  computed: {
+    ...mapGetters({
+      isLoggedIn: 'isLoggedIn'
+    })
+  },
   beforeMount () {
     this.$data.isClient = true
   },
   mounted () {
     // Check if already logged in
-    if (this.$store.getters.isLoggedIn) {
+    if (this.isLoggedIn) {
       this.$router.push('/')
     }
   },
@@ -74,27 +81,32 @@ export default {
     onSubmit () {
       const email = this.$data.email
 
-      this.$fire.auth.sendSignInLinkToEmail(email, {
-        url: `${window.location.origin}/login/magic`,
-        handleCodeInApp: true
-      }).then(() => {
-        if (this.$data.isClient) {
-          window.localStorage.setItem('emailForSignIn', email)
-        }
-        this.$router.push('/login/linksent')
-      }).catch((error) => {
-        console.error(error)
-      })
+      this.$fire.auth
+        .sendSignInLinkToEmail(email, {
+          url: `${window.location.origin}/login/magic`,
+          handleCodeInApp: true
+        })
+        .then(() => {
+          if (this.$data.isClient) {
+            window.localStorage.setItem('emailForSignIn', email)
+          }
+          this.$router.push('/login/linksent')
+        })
+        .catch((error) => {
+          alert(error)
+        })
     },
     signInWithGoogle () {
       const provider = new this.$fireModule.auth.GoogleAuthProvider()
       this.$fire.auth.useDeviceLanguage()
-      this.$fire.auth.signInWithPopup(provider).then((result) => {
-        console.log('result', result)
-        this.$router.go('/')
-      }).catch((error) => {
-        console.error(error)
-      })
+      this.$fire.auth
+        .signInWithRedirect(provider)
+        .then((result) => {
+          this.$router.push('/')
+        })
+        .catch((error) => {
+          alert(error)
+        })
     }
   }
 }
