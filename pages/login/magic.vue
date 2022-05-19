@@ -40,7 +40,7 @@ export default {
             window.localStorage.removeItem('emailForSignIn')
           }
           console.log('result', result)
-          this.$router.push('/')
+          this.$router.go('/')
         }).catch((error) => {
           console.error(error)
         })
