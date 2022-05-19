@@ -58,6 +58,12 @@ export default {
   beforeMount () {
     this.$data.isClient = true
   },
+  mounted () {
+    // Check if already logged in
+    if (this.$store.getters.isLoggedIn) {
+      this.$router.push('/')
+    }
+  },
   methods: {
     onSubmit () {
       const email = this.$data.email
