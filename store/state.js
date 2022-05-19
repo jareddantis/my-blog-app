@@ -1,3 +1,9 @@
 export default () => ({
-  authUser: null
+  authUser: {
+    uid: '',
+    email: '',
+    emailVerified: false,
+    displayName: '',
+    idToken: ''
+  }
 })
