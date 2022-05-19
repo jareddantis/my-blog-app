@@ -5,9 +5,19 @@
 
     <!-- Main content -->
     <div class="md:max-w-6xl max-w-xl w-full mx-auto py-3 px-6">
-      <h1 class="md:text-6xl text-4xl font-bold mb-16">
-        Your entries
+      <h1 class="md:text-6xl text-4xl text-center font-bold mb-16">
+        Hi, {{ userName }}
       </h1>
+
+      <!-- Post create button -->
+      <nuxt-link to="/dashboard/create" class="no-underline">
+        <button
+          type="button"
+          class="text-white bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-bold rounded-lg text-md p-5 mx-auto mb-8 max-w-xs w-full block"
+        >
+          Create post
+        </button>
+      </nuxt-link>
 
       <!-- List of blog entries -->
       <div class="flex flex-row justify-between items-center w-full">
@@ -40,7 +50,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'DashboardIndexPage'
+  name: 'DashboardIndexPage',
+  computed: {
+    ...mapGetters({
+      userName: 'userName'
+    })
+  }
 }
 </script>
