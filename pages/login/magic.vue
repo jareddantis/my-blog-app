@@ -17,11 +17,12 @@ export default {
   data () {
     return {
       email: '',
-      emailNotPresent: {
-        type: Boolean,
-        default: false
-      }
+      emailNotPresent: false,
+      isClient: false
     }
+  },
+  beforeMount () {
+    this.$data.isClient = true
   },
   mounted () {
     if (this.$fire.auth.isSignInWithEmailLink(window.location.href)) {
@@ -34,9 +35,11 @@ export default {
 
       this.$fire.auth.signInWithEmailLink(email, window.location.href)
         .then((result) => {
-          window.localStorage.removeItem('emailForSignIn')
+          if (this.$data.isClient) {
+            window.localStorage.removeItem('emailForSignIn')
+          }
           console.log('result', result)
-          this.$router.push({ name: 'IndexPage' })
+          this.$router.push('/')
         }).catch((error) => {
           console.error(error)
         })

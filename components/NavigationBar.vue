@@ -12,7 +12,7 @@
                 focus:ring-4 focus:ring-teal-300 font-bold rounded-lg text-sm px-5 py-2.5 mr-3">
           Dashboard
         </button>
-        <nuxt-link v-if="isLoggedIn">
+        <nuxt-link v-if="isLoggedIn" to="/logout">
           <button type="button"
             class="text-teal-600 bg-white border-2 border-teal-600 hover:border-teal-800 focus:ring-4
                   focus:ring-teal-300 hover:text-teal-800 font-bold rounded-lg text-sm px-5 py-2.5">
@@ -35,13 +35,14 @@
 export default {
   name: 'NavigationBar',
   props: {
-    isLoggedIn: {
-      type: Boolean,
-      default: false
-    },
     isDashboard: {
       type: Boolean,
       default: false
+    }
+  },
+  computed: {
+    isLoggedIn () {
+      return this.$store.getters.isLoggedIn
     }
   }
 }

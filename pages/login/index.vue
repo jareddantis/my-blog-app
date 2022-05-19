@@ -50,8 +50,12 @@ export default {
   name: 'LoginPage',
   data () {
     return {
-      email: ''
+      email: '',
+      isClient: false
     }
+  },
+  beforeMount () {
+    this.$data.isClient = true
   },
   methods: {
     onSubmit () {
@@ -61,7 +65,9 @@ export default {
         url: `${window.location.origin}/login/magic`,
         handleCodeInApp: true
       }).then(() => {
-        window.localStorage.setItem('emailForSignIn', email)
+        if (this.$data.isClient) {
+          window.localStorage.setItem('emailForSignIn', email)
+        }
         this.$router.push('/login/linksent')
       }).catch((error) => {
         console.error(error)
