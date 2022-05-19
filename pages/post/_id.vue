@@ -1,19 +1,18 @@
 <template>
-  <div class="bg-white w-full">
+  <div class="bg-white bg-full">
     <!-- Navbar -->
     <NavigationBar is-logged-in />
 
     <!-- Main content -->
     <div class="md:max-w-2xl max-w-xl w-full mx-auto py-3 px-6">
-      <h1 class="md:text-6xl text-4xl text-center font-bold">My blog</h1>
-      <hr class="my-8">
+      <!-- Post title -->
+      <h1 class="md:text-6xl text-4xl font-bold font-slight-italic mb-4">My blog</h1>
 
-      <!-- Blog posts -->
-      <article class="prose mx-auto max-w-full w-full">
-        <nuxt-link to="/post/1">
-          <h1 class="mb-0">Hello world</h1>
-        </nuxt-link>
-        <h3 class="text-teal-500 mt-0 mb-4">by Author &#8212; May 21, 2022</h3>
+      <!-- Post author and date -->
+      <h2 class="text-xl text-teal-500">by Author<br>May 21, 2022</h2>
+
+      <!-- Post content -->
+      <article class="prose mt-8 mx-auto max-w-full w-full">
         <p class="font-serif">
           Morbi placerat congue nisi et eleifend. Nam cursus cursus orci eget molestie.
           Donec libero lorem, porta quis gravida id, tempor ut arcu. Mauris in posuere odio.
@@ -27,10 +26,16 @@
   </div>
 </template>
 
+<style lang="postcss" scoped>
+.font-slight-italic {
+  font-variation-settings: "slnt" -5;
+}
+</style>
+
 <script>
 import NavigationBar from '~/components/NavigationBar.vue'
 export default {
-  name: 'IndexPage',
+  name: 'PostPage',
   components: { NavigationBar }
 }
 </script>
