@@ -1,5 +1,5 @@
 <template>
-  <nav class="sticky top-0 bg-white w-full border-b border-gray-200 mb-4">
+  <nav class="sticky top-0 bg-white w-full border-b border-gray-200 mb-8">
     <div
       class="flex flex-row flex-wrap justify-between items-center max-w-6xl w-full mx-auto p-6"
     >
