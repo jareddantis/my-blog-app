@@ -33,6 +33,7 @@ export default {
         return
       }
 
+      this.$data.email = email
       this.$fire.auth.signInWithEmailLink(email, window.location.href)
         .then((result) => {
           if (this.$data.isClient) {
