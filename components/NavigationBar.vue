@@ -12,13 +12,13 @@
                 focus:ring-4 focus:ring-teal-300 font-bold rounded-lg text-sm px-5 py-2.5 mr-3">
           Dashboard
         </button>
-        <nuxt-link v-if="isLoggedIn" to="/logout">
-          <button type="button"
-            class="text-teal-600 bg-white border-2 border-teal-600 hover:border-teal-800 focus:ring-4
-                  focus:ring-teal-300 hover:text-teal-800 font-bold rounded-lg text-sm px-5 py-2.5">
-            Log out
-          </button>
-        </nuxt-link>
+        <button v-if="isLoggedIn"
+          type="button"
+          class="text-teal-600 bg-white border-2 border-teal-600 hover:border-teal-800 focus:ring-4
+                focus:ring-teal-300 hover:text-teal-800 font-bold rounded-lg text-sm px-5 py-2.5"
+          @click="logout()">
+          Log out
+        </button>
         <nuxt-link v-else to="/login">
           <button type="button"
             class="text-white bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300
@@ -43,6 +43,17 @@ export default {
   computed: {
     isLoggedIn () {
       return this.$store.getters.isLoggedIn
+    }
+  },
+  methods: {
+    logout () {
+      this.$fire.auth.signOut()
+        .then(() => {
+          this.$router.go('/')
+        })
+        .catch((error) => {
+          console.error(error)
+        })
     }
   }
 }
