@@ -10,7 +10,7 @@
 
       <!-- Blog posts -->
       <article class="prose mx-auto max-w-full w-full">
-        <nuxt-link to="/post/1">
+        <nuxt-link to="/post/1" class="no-underline hover:underline">
           <h1 class="mb-0">Hello world</h1>
         </nuxt-link>
         <h3 class="text-teal-500 mt-0 mb-4">by Author &#8212; May 21, 2022</h3>
