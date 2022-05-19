@@ -70,6 +70,7 @@ typings/
 
 # Nuxt generate
 dist
+static/firebase-auth-sw.js
 
 # vuepress build output
 .vuepress/dist
