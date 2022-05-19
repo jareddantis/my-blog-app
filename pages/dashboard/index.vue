@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white w-full">
     <!-- Navbar -->
-    <NavigationBar />
+    <NavigationBar is-dashboard />
 
     <!-- Main content -->
     <div class="md:max-w-6xl max-w-xl w-full mx-auto py-3 px-6">
