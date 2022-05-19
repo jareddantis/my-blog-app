@@ -37,7 +37,8 @@
         </div>
 
         <!-- Sign in with Google -->
-        <button class="bg-gray-500 rounded-md p-3 w-full text-white font-bold hover:bg-gray-700">
+        <button @click="signInWithGoogle()"
+          class="bg-gray-500 rounded-md p-3 w-full text-white font-bold hover:bg-gray-700">
           Sign in with Google
         </button>
       </div>
@@ -69,6 +70,16 @@ export default {
           window.localStorage.setItem('emailForSignIn', email)
         }
         this.$router.push('/login/linksent')
+      }).catch((error) => {
+        console.error(error)
+      })
+    },
+    signInWithGoogle () {
+      const provider = new this.$fireModule.auth.GoogleAuthProvider()
+      this.$fire.auth.useDeviceLanguage()
+      this.$fire.auth.signInWithPopup(provider).then((result) => {
+        console.log('result', result)
+        this.$router.go('/')
       }).catch((error) => {
         console.error(error)
       })
