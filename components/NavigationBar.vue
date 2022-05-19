@@ -1,10 +1,10 @@
 <template>
   <nav class="bg-white w-full">
     <div class="flex flex-row flex-wrap justify-between items-center max-w-6xl w-full mx-auto p-6">
-      <a href="#" class="flex items-center">
+      <nuxt-link to="/" class="flex items-center">
         <img class="h-8 mr-4" src="/logo/1x/JotLogo.png" alt="Jot">
-        <span class="self-center text-xl font-semibold text-black">Jot</span>
-      </a>
+        <span class="self-center text-xl font-semibold text-black">My blog</span>
+      </nuxt-link>
       <div>
         <button v-if="isLoggedIn && !isDashboard"
           type="button"
