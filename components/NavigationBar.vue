@@ -1,6 +1,6 @@
 <template>
   <nav class="bg-white w-full">
-    <div class="flex flex-row flex-wrap justify-between items-center max-w-6xl w-full mx-auto p-3">
+    <div class="flex flex-row flex-wrap justify-between items-center max-w-6xl w-full mx-auto p-6">
       <a href="#" class="flex items-center">
         <img class="h-8 mr-4" src="/logo/1x/JotLogo.png" alt="Jot">
         <span class="self-center text-xl font-semibold text-black">Jot</span>
