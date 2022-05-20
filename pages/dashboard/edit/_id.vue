@@ -79,7 +79,8 @@ export default {
         .set({
           title,
           content,
-          date: new Date()
+          date: new Date(),
+          author: this.userID
         })
         .then((docRef) => {
           // Redirect to post page
