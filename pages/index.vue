@@ -4,13 +4,18 @@
       Latest posts
     </h1>
 
-    <!-- Blog posts -->
+    <!-- Loading -->
     <div
       v-show="loading"
       class="w-full flex flex-row justify-center items-center"
     >
       <SimpleSpinner />
     </div>
+    <p v-show="!loading && posts.length === 0" class="text-center">
+      No posts.
+    </p>
+
+    <!-- Blog posts -->
     <article
       v-for="post in posts"
       :key="post.id"
