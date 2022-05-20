@@ -21,7 +21,7 @@
     </h2>
 
     <!-- Post content -->
-    <article class="prose mt-8 mx-auto max-w-full w-full">
+    <article class="prose mt-8 mx-auto max-w-full w-full pb-8">
       <p class="font-serif">
         {{ content }}
       </p>
