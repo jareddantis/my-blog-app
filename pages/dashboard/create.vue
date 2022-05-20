@@ -1,5 +1,9 @@
 <template>
-  <EditorPage :is-submitting="isSubmitting" @submit="onSubmit" />
+  <EditorPage
+    :is-submitting="isSubmitting"
+    :is-loading="false"
+    @submit="onSubmit"
+  />
 </template>
 
 <script>
