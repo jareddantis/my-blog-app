@@ -78,6 +78,7 @@ export default {
       // Fetch the blog posts
       this.$fire.firestore
         .collection('blog')
+        .orderBy('date', 'desc')
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
