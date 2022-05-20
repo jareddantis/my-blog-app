@@ -61,7 +61,7 @@ export default {
 
       // Fetch all authors first
       this.$fire.firestore
-        .collection('author')
+        .collection('authors')
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {

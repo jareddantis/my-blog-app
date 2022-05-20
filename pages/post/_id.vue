@@ -62,7 +62,7 @@ export default {
 
             // Fetch author's name and email
             this.$fire.firestore
-              .collection('author')
+              .collection('authors')
               .doc(post.author)
               .get()
               .then((doc) => {
