@@ -49,6 +49,7 @@
         <button
           type="button"
           class="text-red-600 bg-white border-2 border-red-600 hover:border-red-800 focus:ring-4 focus:ring-red-300 hover:text-red-800 font-bold rounded-lg text-sm px-5 py-2.5"
+          @click="confirmDelete(post.id)"
         >
           Delete
         </button>
@@ -100,6 +101,20 @@ export default {
             })
           })
           this.loading = false
+        })
+    },
+    confirmDelete (postID) {
+      if (confirm('Are you sure you want to delete this post?')) {
+        this.deletePost(postID)
+      }
+    },
+    deletePost (postID) {
+      this.$fire.firestore
+        .collection('blog')
+        .doc(postID)
+        .delete()
+        .then(() => {
+          this.$router.go('/dashboard')
         })
     }
   }
