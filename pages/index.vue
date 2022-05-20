@@ -5,23 +5,34 @@
     </h1>
 
     <!-- Blog posts -->
-    <article class="prose mx-auto max-w-full w-full">
-      <nuxt-link to="/post/1" class="no-underline hover:underline">
+    <div
+      v-show="loading"
+      class="w-full flex flex-row justify-center items-center"
+    >
+      <SimpleSpinner />
+    </div>
+    <article
+      v-for="post in posts"
+      :key="post.id"
+      class="prose mx-auto max-w-full w-full mb-12 last:mb-8"
+    >
+      <nuxt-link :to="'/post/' + post.id" class="no-underline hover:underline">
         <h1 class="mb-0">
-          Hello world
+          {{ post.title }}
         </h1>
       </nuxt-link>
-      <h3 class="text-teal-500 mt-0 mb-4">
-        by Author &#8212; May 21, 2022
+      <h3 class="text-teal-600 mt-0 mb-2 font-normal">
+        by
+        <a
+          :href="'mailto:' + post.authorEmail"
+          class="text-teal-600 font-bold"
+          rel="noopener"
+          target="_blank"
+        >{{ post.author }}</a>
+        &#8212; {{ post.timestamp }}
       </h3>
       <p class="font-serif">
-        Morbi placerat congue nisi et eleifend. Nam cursus cursus orci eget
-        molestie. Donec libero lorem, porta quis gravida id, tempor ut arcu.
-        Mauris in posuere odio. In in eleifend augue. Phasellus vitae egestas
-        tellus. Mauris non posuere elit, ut tincidunt felis. Donec sit amet leo
-        vel ante congue vulputate et ut elit. Nam ipsum nisi, ultrices vitae
-        ullamcorper non, luctus id lectus. Vivamus vulputate nec massa at
-        laoreet. Etiam sit amet blandit purus.
+        {{ post.content }}
       </p>
     </article>
   </DefaultPage>
@@ -29,9 +40,72 @@
 
 <script>
 import DefaultPage from '~/components/DefaultPage.vue'
+import SimpleSpinner from '~/components/Spinner.vue'
 
 export default {
   name: 'IndexPage',
-  components: { DefaultPage }
+  components: { DefaultPage, SimpleSpinner },
+  data () {
+    return {
+      loading: true,
+      posts: []
+    }
+  },
+  mounted () {
+    // Get all blog posts
+    this.fetchPosts()
+  },
+  methods: {
+    fetchPosts () {
+      const authors = {}
+
+      // Fetch all authors first
+      this.$fire.firestore
+        .collection('author')
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            const author = doc.data()
+
+            // Save author's name and email by ID
+            authors[author.id] = {
+              name: author.name,
+              email: author.email
+            }
+          })
+        })
+
+      // Fetch the blog posts
+      this.$fire.firestore
+        .collection('blog')
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            const post = doc.data()
+
+            // Get author's name and email
+            const author = authors[post.authorId]
+
+            // Truncate post content to 200 characters
+            let content = post.content.substring(0, 200)
+            if (post.content.length > 200) {
+              content += '...'
+            }
+
+            // Save post object to list
+            this.posts.push({
+              id: doc.id,
+              title: post.title,
+              author: author.name,
+              authorEmail: author.email,
+              content,
+              timestamp: post.date.toDate().toDateString()
+            })
+          })
+        })
+
+      this.loading = false
+    }
+  }
 }
 </script>
