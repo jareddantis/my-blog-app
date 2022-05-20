@@ -58,7 +58,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import DefaultPage from '~/components/DefaultPage.vue'
-import SimpleSpinner from '~/components/Spinner.vue'
+import SimpleSpinner from '~/components/SimpleSpinner.vue'
 
 export default {
   name: 'DashboardIndexPage',
