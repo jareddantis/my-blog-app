@@ -1,5 +1,5 @@
 <template>
-  <DefaultPage>
+  <DefaultPage small-width>
     <!-- Post title -->
     <h1 class="md:text-6xl text-4xl font-bold font-slight-italic mb-4">
       {{ title }}
