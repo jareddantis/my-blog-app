@@ -1,7 +1,7 @@
 <template>
   <DefaultPage small-width>
     <h1 class="md:text-6xl text-4xl text-center font-bold mb-16">
-      My blog
+      Latest posts
     </h1>
 
     <!-- Blog posts -->
