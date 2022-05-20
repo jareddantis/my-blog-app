@@ -4,24 +4,36 @@
       Hi, {{ userName }}
     </h1>
 
+    <!-- Loading spinner -->
+    <div
+      v-show="loading"
+      class="w-full flex flex-row justify-center items-center"
+    >
+      <SimpleSpinner />
+    </div>
+
     <!-- Post create button -->
-    <nuxt-link to="/dashboard/create" class="no-underline">
+    <nuxt-link v-show="!loading" to="/dashboard/create" class="no-underline">
       <button
         type="button"
-        class="text-white bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-bold rounded-lg text-md p-5 mx-auto mb-8 max-w-xs w-full block"
+        class="text-white bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-bold rounded-lg text-xl p-5 mx-auto mb-8 max-w-xs w-full block"
       >
         Create post
       </button>
     </nuxt-link>
 
     <!-- List of blog entries -->
-    <div class="flex flex-row justify-between items-center w-full">
+    <div
+      v-for="post in posts"
+      :key="post.id"
+      class="flex flex-row justify-between items-center w-full mb-4 last:mb-8"
+    >
       <!-- Post title and date -->
       <div>
         <h3 class="font-bold text-2xl">
-          Lorem ipsum dolor sit amet
+          {{ post.title }}
         </h3>
-        <p>May 21, 2022 &#8212; 10:23 AM</p>
+        <p>{{ post.timestamp }}</p>
       </div>
 
       <!-- Post controls -->
@@ -46,14 +58,49 @@
 <script>
 import { mapGetters } from 'vuex'
 import DefaultPage from '~/components/DefaultPage.vue'
+import SimpleSpinner from '~/components/Spinner.vue'
 
 export default {
   name: 'DashboardIndexPage',
   computed: {
     ...mapGetters({
-      userName: 'userName'
+      userName: 'userName',
+      userID: 'userID'
     })
   },
-  components: { DefaultPage }
+  components: { DefaultPage, SimpleSpinner },
+  data () {
+    return {
+      loading: true,
+      posts: []
+    }
+  },
+  mounted () {
+    // Get all blog posts
+    this.fetchPosts()
+  },
+  methods: {
+    fetchPosts () {
+      // Fetch all blog posts whose author matches this author's ID
+      this.$fire.firestore
+        .collection('blog')
+        .where('author', '==', this.userID)
+        .orderBy('date', 'desc')
+        .get()
+        .then((snapshot) => {
+          this.posts = []
+          snapshot.forEach((doc) => {
+            // Save post object to list
+            this.posts.push({
+              id: doc.id,
+              title: doc.data().title,
+              timestamp: doc.data().date.toDate().toDateString()
+            })
+            console.log(doc)
+          })
+          this.loading = false
+        })
+    }
+  }
 }
 </script>
