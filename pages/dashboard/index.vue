@@ -38,12 +38,14 @@
 
       <!-- Post controls -->
       <div class="shrink-0">
-        <button
-          type="button"
-          class="text-white bg-teal-600 hover:bg-teal-800 border-2 border-teal-600 hover:border-teal-800 focus:ring-4 focus:ring-teal-300 font-bold rounded-lg text-sm px-5 py-2.5 mr-3"
-        >
-          Edit
-        </button>
+        <nuxt-link :to="'/dashboard/edit/' + post.id">
+          <button
+            type="button"
+            class="text-white bg-teal-600 hover:bg-teal-800 border-2 border-teal-600 hover:border-teal-800 focus:ring-4 focus:ring-teal-300 font-bold rounded-lg text-sm px-5 py-2.5 mr-3"
+          >
+            Edit
+          </button>
+        </nuxt-link>
         <button
           type="button"
           class="text-red-600 bg-white border-2 border-red-600 hover:border-red-800 focus:ring-4 focus:ring-red-300 hover:text-red-800 font-bold rounded-lg text-sm px-5 py-2.5"
@@ -96,7 +98,6 @@ export default {
               title: doc.data().title,
               timestamp: doc.data().date.toDate().toDateString()
             })
-            console.log(doc)
           })
           this.loading = false
         })
