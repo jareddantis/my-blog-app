@@ -7,7 +7,16 @@
 
     <!-- Post author and date -->
     <h2 class="text-xl text-teal-500">
-      {{ authorName }}<br>
+      by
+      <a
+        :href="'mailto:' + authorEmail"
+        rel="noopener"
+        target="_blank"
+        class="underline hover:text-teal-800 font-bold"
+      >
+        {{ authorName }}
+      </a>
+      <br>
       {{ timestamp }}
     </h2>
 
@@ -30,6 +39,7 @@ export default {
     return {
       title: 'Loading post...',
       authorName: '',
+      authorEmail: '',
       content: '',
       timestamp: ''
     }
@@ -49,8 +59,21 @@ export default {
         .then((doc) => {
           if (doc.exists) {
             const post = doc.data()
+
+            // Fetch author's name and email
+            this.$fire.firestore
+              .collection('author')
+              .doc(post.author)
+              .get()
+              .then((doc) => {
+                if (doc.exists) {
+                  this.authorName = doc.data().name
+                  this.authorEmail = doc.data().email
+                }
+              })
+
+            // Fetch the rest of the post data
             this.title = post.title
-            this.authorName = 'by ' + post.author
             this.content = post.content
             this.timestamp = post.date.toDate().toDateString()
           }
