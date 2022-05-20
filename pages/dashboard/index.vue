@@ -21,6 +21,9 @@
         Create post
       </button>
     </nuxt-link>
+    <p v-show="!loading && posts.length === 0" class="text-center mt-8">
+      You haven't posted anything yet!
+    </p>
 
     <!-- List of blog entries -->
     <div
