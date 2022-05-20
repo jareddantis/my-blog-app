@@ -12,5 +12,19 @@ export default {
     } catch {
       return ''
     }
+  },
+  userEmail: (state) => {
+    try {
+      return state.authUser.email
+    } catch {
+      return ''
+    }
+  },
+  userID: (state) => {
+    try {
+      return state.authUser.uid
+    } catch {
+      return ''
+    }
   }
 }
