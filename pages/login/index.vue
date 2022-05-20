@@ -100,7 +100,7 @@ export default {
       const provider = new this.$fireModule.auth.GoogleAuthProvider()
       this.$fire.auth.useDeviceLanguage()
       this.$fire.auth
-        .signInWithRedirect(provider)
+        .signInWithPopup(provider)
         .then((result) => {
           this.$router.push('/')
         })
