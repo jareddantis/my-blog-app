@@ -9,7 +9,28 @@
           class="hidden md:inline-block self-center text-xl font-semibold text-black"
         >My blog</span>
       </nuxt-link>
-      <div>
+      <div class="flex flex-row justify-end items-center">
+        <nuxt-link to="/search">
+          <button
+            type="button"
+            class="text-gray-600 hover:text-gray-800 focus:ring-4 focus:ring-gray-300 font-bold rounded-lg text-sm p-2.5 mr-3"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </button>
+        </nuxt-link>
         <nuxt-link v-if="isLoggedIn && !isDashboard" to="/dashboard">
           <button
             type="button"
