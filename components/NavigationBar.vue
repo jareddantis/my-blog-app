@@ -7,7 +7,7 @@
         <img class="h-8 mr-4" src="/logo/1x/JotLogo.png" alt="Jot">
         <span
           class="hidden md:inline-block self-center text-xl font-semibold text-black"
-        >My blog</span>
+        >Jot</span>
       </nuxt-link>
       <div class="flex flex-row justify-end items-center">
         <nuxt-link to="/search">
