@@ -1,4 +1,4 @@
-# mycure-blog-app
+# my-blog-app
 
 ## Build Setup
 
