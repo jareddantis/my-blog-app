@@ -61,54 +61,51 @@ export default {
     this.fetchPosts()
   },
   methods: {
-    fetchPosts () {
+    async fetchPosts () {
       const authors = {}
 
       // Fetch all authors first
-      this.$fire.firestore
+      const authorQuerySnapshot = await this.$fire.firestore
         .collection('authors')
         .get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            const author = doc.data()
+      authorQuerySnapshot.forEach((doc) => {
+        const author = doc.data()
 
-            // Save author's name and email by ID
-            authors[author.id] = {
-              name: author.name,
-              email: author.email
-            }
-          })
-        })
+        // Save author's name and email by ID
+        authors[doc.id] = {
+          name: author.name,
+          email: author.email
+        }
+      })
+      console.log(authors)
 
       // Fetch the blog posts
-      this.$fire.firestore
+      const postQuerySnapshot = await this.$fire.firestore
         .collection('blog')
         .orderBy('date', 'desc')
         .get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            const post = doc.data()
+      postQuerySnapshot.forEach((doc) => {
+        const post = doc.data()
 
-            // Get author's name and email
-            const author = authors[post.authorId]
+        // Get author's name and email
+        const author = authors[doc.data().author]
 
-            // Truncate post content to 200 characters
-            let content = post.content.substring(0, 200)
-            if (post.content.length > 200) {
-              content += '...'
-            }
+        // Truncate post content to 200 characters
+        let content = post.content.substring(0, 200)
+        if (post.content.length > 200) {
+          content += '...'
+        }
 
-            // Save post object to list
-            this.posts.push({
-              id: doc.id,
-              title: post.title,
-              author: author.name,
-              authorEmail: author.email,
-              content,
-              timestamp: post.date.toDate().toDateString()
-            })
-          })
+        // Save post object to list
+        this.posts.push({
+          id: doc.id,
+          title: post.title,
+          author: author.name,
+          authorEmail: author.email,
+          content,
+          timestamp: post.date.toDate().toDateString()
         })
+      })
 
       this.loading = false
     }
