@@ -58,6 +58,12 @@ export default {
       posts: []
     }
   },
+  watch: {
+    query () {
+      // Trim spaces
+      this.query = this.query.trim()
+    }
+  },
   methods: {
     async searchForPosts () {
       this.loading = true
